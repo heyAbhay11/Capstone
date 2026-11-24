@@ -1,19 +1,20 @@
 import express from "express";
 import morgan from "morgan";
-
+import agentRouter from "./routes/agent.routes.js";
 const app = express();
 
 app.use(express.json());
 app.use(morgan("common"));
 
-app.get('/api/status/heathz',(req,res)=>{
-    res.json(200).json({
-        status:"OK"
-    })
+app.get("/api/status/healthz", (req, res) => {
+    res.status(200).json({
+        status: "OK",
+    });
 })
 
-app.get('/api/ai/heathz',(req,res)=>{
-    res.json(200).json({
-        status:"success"
-    })
-})
+
+//Routes
+app.use("/api/ai/agent",agentRouter)
+
+
+export default app;
